@@ -1,0 +1,27 @@
+{
+  "name": "global-atlas-starter",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "data:csv": "python scripts/prepare_data.py data/pins.csv",
+    "data:xlsx": "python scripts/prepare_data.py data/pins.xlsx"
+  },
+  "dependencies": {
+    "maplibre-gl": "^6.17.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.2"
+  }
+}
