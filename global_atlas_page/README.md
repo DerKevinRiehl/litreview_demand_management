@@ -1,4 +1,4 @@
-# Global Atlas — open-source globe + timeline starter
+# Demand Management Atlas
 
 A client-side, GitHub Pages-ready interactive **3D globe / 2D map** with clickable pins, popups, a two-handle date-range slider and hierarchical checkbox filters. Pin data lives in **CSV or Excel**, not in the application code.
 
@@ -8,6 +8,22 @@ A centered spinner stays visible until the map and location data finish loading.
 Use the **Light mode / Dark mode** button along the bottom of the map to change
 both the interface and basemap. Your browser remembers the selected theme;
 switching themes preserves the map view, projection, and filters.
+
+Pin **color** identifies its category, while **shape** identifies its source:
+Science uses circles and News uses diamonds. Both support the same filters and
+clickable popups. The shape key appears beside the category-color legend.
+
+The rotation button starts enabled and slowly turns the globe. It pauses while
+you navigate, hover over a pin, inspect a popup, or switch to the flat map.
+Click the rotation button to stop or restart it.
+
+Hover over a timeline date to edit its month and year. You can also focus the
+date with the keyboard or tap it on a touch screen. From selects the first day
+of a month; To selects its last day. The dropdowns and slider stay synchronized.
+The **A** button plays the timeline from January 1960 to December 2025 in about
+66 seconds, keeping the left handle at the minimum. Click it again to pause or
+resume. Editing dates, dragging a handle, or minimizing the timeline pauses
+playback; Reset all filters stops playback and restores the full range.
 
 ## Quick start
 
@@ -65,15 +81,23 @@ Edit `data/pins.csv` in Excel/LibreOffice or replace it with your CSV file. The 
 | `location` | No | `Zürich, Switzerland` | Popup subtitle |
 | `description` | No | `A short description` | Popup text |
 | `url` | No | `https://example.org` | Optional popup link (http/https only) |
+| `source_type` | No | `Science` | `News` or `Science` (case-insensitive); blank entries appear under All |
 
 Example CSV row:
 
 ```csv
-id,title,latitude,longitude,date,category,location,description,url
-item-001,My example project,47.3769,8.5417,2026-11-11,Research / Medicine / Diagnostics,"Zürich, Switzerland",Details about this project,https://example.org
+id,title,latitude,longitude,date,category,location,description,url,source_type
+item-001,My example project,47.3769,8.5417,2026-11-11,Research / Medicine / Diagnostics,"Zürich, Switzerland",Details about this project,https://example.org,Science
 ```
 
-Quoted CSV fields may contain commas. A hierarchy is created automatically from category paths, so adding `Research / Medicine / Cardiology` creates a nested **Cardiology** checkbox. Parent checkboxes select/deselect all descendants. Dates drive the two-handle slider (inclusive bounds).
+Quoted CSV fields may contain commas. A hierarchy is created automatically from category paths, so adding `Research / Medicine / Cardiology` creates a nested **Cardiology** checkbox. Parent checkboxes select/deselect all descendants. The two-handle timeline spans **1 January 1960 through 31 December 2025**, including both endpoints. It starts with this full range selected, and **Reset all filters** restores it. Pins outside this period remain in the data but are excluded by the date filter.
+
+The **Source Type** control selects **All**, **News**, or **Science**, together
+with the date and category filters. Its counts reflect the selected dates and
+categories. **Reset all filters** also restores **All** evidence types.
+The 48 example rows have a reproducible random split of 24 News and 24 Science
+entries; these are illustrative assignments. Use your actual classification
+when replacing the example data. CSV and Excel both support `source_type`.
 
 Regenerate GeoJSON after any edit:
 
@@ -119,7 +143,7 @@ With the current repository name, the address is:
 `https://derkevinriehl.github.io/litreview_demand_management/`
 
 The repository name stays **`litreview_demand_management`**. The browser title is
-**Demand Management — Global Evidence Atlas**; the title is independent of the
+**Demand Management Atlas**; the title is independent of the
 repository's URL. `vite.config.ts` automatically uses the repository name for
 asset, data, and map-worker URLs. The `global_atlas_page/` source folder does not
 appear in the published URL.
@@ -132,8 +156,8 @@ Reference: [GitHub Pages settings](https://docs.github.com/en/pages/getting-star
 
 ## Performance design
 
-- **One** GeoJSON source and two WebGL circle layers, **no DOM marker per pin**.
-- `map.setFilter()` composes a numeric day interval with the selected leaf categories. Data stays loaded; the source is **not** rebuilt on slider movement.
+- **One** GeoJSON source, circle layers for Science and halos, and a symbol layer for News diamonds, **no DOM marker per pin**.
+- `map.setFilter()` composes a numeric day interval with the selected leaf categories and source type. Data stays loaded; the source is **not** rebuilt on slider movement.
 - Date-count display uses sorted day arrays and binary searches per category, rather than scanning all points every time.
 - Filters are synchronized through `requestAnimationFrame` to avoid redundant draw updates during slider dragging.
 - **No clustering by default:** clustering the *unfiltered* point source and then hiding layers would show misleading cluster totals after filtering. This starter prioritizes correct filtered pins.

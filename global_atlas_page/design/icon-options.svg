@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="270" viewBox="0 0 760 270" role="img" aria-labelledby="title description">
+  <title id="title">Demand Management Atlas icon suggestions</title>
+  <desc id="description">Three blue badges with dark linework: a globe with a car, a globe with a route, and a map pin with a car. Each is shown at a large preview size and the actual 41 pixel badge size.</desc>
+  <defs>
+    <symbol id="globe-car" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="13" fill="#6ebcf4"/>
+      <g fill="none" stroke="#081628" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="23" r="17"/>
+        <path d="M24 6c-8 8-8 26 0 34M24 6c8 8 8 26 0 34M8 18h32M10 32h28"/>
+        <path fill="#6ebcf4" d="m14 24 3-7h14l3 7 2 3v8H12v-8z"/>
+        <path d="M14 24h20M17 29h2m10 0h2M15 35v3m18-3v3"/>
+      </g>
+    </symbol>
+    <symbol id="globe-route" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="13" fill="#6ebcf4"/>
+      <g fill="none" stroke="#081628" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="24" cy="24" r="17"/>
+        <path d="M24 7c-11 10-11 24 0 34M24 7c6 5 9 12 8 19M8 18h32M8 30h13"/>
+        <path fill="#6ebcf4" stroke-width="5" d="M14 34c5-9 13 3 17-7"/>
+        <path d="M14 34c5-9 13 3 17-7"/>
+        <circle cx="14" cy="34" r="2.5" fill="#6ebcf4"/>
+        <circle cx="31" cy="27" r="2.5" fill="#6ebcf4"/>
+      </g>
+    </symbol>
+    <symbol id="transport-pin" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="13" fill="#6ebcf4"/>
+      <g fill="none" stroke="#081628" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M38 20c0 10-14 21-14 21S10 30 10 20a14 14 0 0 1 28 0z"/>
+        <path d="m16 20 2-6h12l2 6 1 2v6H15v-6zM16 20h16M18 24h2m8 0h2M18 28v3m12-3v3"/>
+      </g>
+    </symbol>
+  </defs>
+  <rect width="760" height="270" fill="#edf4f9"/>
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#18344d">
+    <text x="20" y="31" font-size="20" font-weight="700">Icon directions</text>
+    <text x="20" y="53" font-size="12" fill="#4a667d">Large preview + actual badge size</text>
+    <g fill="#f8fbfd" stroke="#c6d7e4">
+      <rect x="20" y="72" width="230" height="178" rx="12"/>
+      <rect x="265" y="72" width="230" height="178" rx="12"/>
+      <rect x="510" y="72" width="230" height="178" rx="12"/>
+    </g>
+    <use href="#globe-car" x="66" y="91" width="80" height="80"/>
+    <use href="#globe-car" x="168" y="118" width="41" height="41"/>
+    <use href="#globe-route" x="311" y="91" width="80" height="80"/>
+    <use href="#globe-route" x="413" y="118" width="41" height="41"/>
+    <use href="#transport-pin" x="556" y="91" width="80" height="80"/>
+    <use href="#transport-pin" x="658" y="118" width="41" height="41"/>
+    <g text-anchor="middle">
+      <text x="135" y="205" font-size="16" font-weight="700">Globe + car</text>
+      <text x="380" y="205" font-size="16" font-weight="700">Globe + route</text>
+      <text x="625" y="205" font-size="16" font-weight="700">Transport pin</text>
+      <g font-size="12" fill="#4a667d">
+        <text x="135" y="227">Global transport evidence</text>
+        <text x="380" y="227">Travel across transport modes</text>
+        <text x="625" y="227">Location-based transport research</text>
+      </g>
+    </g>
+  </g>
+</svg>

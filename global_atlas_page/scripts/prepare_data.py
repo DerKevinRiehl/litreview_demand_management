@@ -17,7 +17,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "public" / "data" / "pins.geojson"
 REQUIRED = {"id", "title", "latitude", "longitude", "date", "category"}
-OPTIONAL = {"location", "description", "url"}
+OPTIONAL = {"location", "description", "url", "source_type"}
 
 
 def read_rows(path: Path):
@@ -74,6 +74,9 @@ def make_geojson(path: Path):
                 url = strval(row.get("url"))
                 if url and urlsplit(url).scheme not in ("http", "https"):
                     raise ValueError("url must be blank or start with https:// or http://")
+                source_type = strval(row.get("source_type")).lower()
+                if source_type not in ("", "news", "science"):
+                    raise ValueError("source_type must be News, Science, or blank")
                 properties = {
                     "id": key,
                     "title": title,
@@ -84,6 +87,7 @@ def make_geojson(path: Path):
                     "location": strval(row.get("location")),
                     "description": strval(row.get("description")),
                     "url": url,
+                    "source_type": source_type,
                 }
                 features.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(lon, 6), round(lat, 6)]}, "properties": properties})
             except (ValueError, TypeError, KeyError) as exc:
